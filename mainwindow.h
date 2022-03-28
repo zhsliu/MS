@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <search.h>
+#include <aboutdialog.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,9 +17,20 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_action_8_triggered();
+
+    void on_actionaction_4_triggered();
+
+    void on_action_7_triggered();
+
+    void on_do_search_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
     search *searchbtn ;
+    AboutDialog *about;
+
 
 };
 #endif // MAINWINDOW_H

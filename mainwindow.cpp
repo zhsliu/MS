@@ -4,6 +4,9 @@
 #include "QAction"
 #include "search.h"
 #include "QWidget"
+#include "aboutdialog.h"
+#include "QStackedWidget"
+#include "QMessageBox"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent)
         searchbtn = new search;
         searchbtn->show();
     });
+
+    ui->stackedWidget->setCurrentIndex(0);
+
 }
 
 MainWindow::~MainWindow()
@@ -34,3 +40,26 @@ MainWindow::~MainWindow()
 
 
 
+//帮助
+void MainWindow::on_action_8_triggered()
+{
+    about = new AboutDialog;
+    about->show();
+}
+
+//退出
+void MainWindow::on_actionaction_4_triggered()
+{
+    close();
+}
+
+//检索功能
+void MainWindow::on_action_7_triggered()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_do_search_btn_clicked()
+{
+    QMessageBox::information(this,"提示","正在检索，请稍等。。");
+}
