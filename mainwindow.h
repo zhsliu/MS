@@ -26,6 +26,10 @@ private slots:
 
     void on_do_search_btn_clicked();
 
+    void on_actionaction_1_triggered();
+
+    void on_actionaction_2_triggered();
+
 private:
     Ui::MainWindow *ui;
     search *searchbtn ;

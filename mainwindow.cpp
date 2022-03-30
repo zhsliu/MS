@@ -7,6 +7,10 @@
 #include "aboutdialog.h"
 #include "QStackedWidget"
 #include "QMessageBox"
+#include "gen_data.cpp"
+#include "gen_tree.cpp"
+#include "do_search.cpp"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -62,4 +66,19 @@ void MainWindow::on_action_7_triggered()
 void MainWindow::on_do_search_btn_clicked()
 {
     QMessageBox::information(this,"提示","正在检索，请稍等。。");
+//    do_search();
+
+}
+
+//生成数据
+void MainWindow::on_actionaction_1_triggered()
+{
+    gen_data();
+    QMessageBox::information(this,"提示","数据生成完成");
+}
+
+//生成树
+void MainWindow::on_actionaction_2_triggered()
+{
+    gen_tree();
 }

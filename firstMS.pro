@@ -17,6 +17,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     aboutdialog.cpp \
+    do_search.cpp \
+    gen_data.cpp \
+    gen_tree.cpp \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -24,6 +27,7 @@ SOURCES += \
 
 HEADERS += \
     aboutdialog.h \
+    define.h \
     login.h \
     mainwindow.h \
     search.h
