@@ -34,3 +34,8 @@ search::~search()
 {
     delete ui;
 }
+
+void search::on_upload_btn_clicked()
+{
+    QMessageBox::warning(this,"提示","上传完成");
+}

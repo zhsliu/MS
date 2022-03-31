@@ -23,20 +23,26 @@ SOURCES += \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
-    search.cpp
+    result.cpp \
+    search.cpp \
+    searchresult.cpp
 
 HEADERS += \
     aboutdialog.h \
     define.h \
     login.h \
     mainwindow.h \
-    search.h
+    result.h \
+    search.h \
+    searchresult.h
 
 FORMS += \
     aboutdialog.ui \
     login.ui \
     mainwindow.ui \
-    search.ui
+    result.ui \
+    search.ui \
+    searchresult.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <search.h>
 #include <aboutdialog.h>
+#include "result.h"
+#include "searchresult.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,10 +32,14 @@ private slots:
 
     void on_actionaction_2_triggered();
 
+    void on_action_6_triggered();
+
 private:
     Ui::MainWindow *ui;
     search *searchbtn ;
     AboutDialog *about;
+    Result *res;
+    searchResult *seres;
 
 
 };

@@ -5,11 +5,17 @@
 // only 26*n is support due to invert matrix function
 // only 26 and 676 add to git
 #define DICT_SIZE       650
-#define FILE_PATH       "/home/liu/QtProjece/firstMS/doc/FILE0001.txt"
-#define MATRIX_PATH     "/home/liu/QtProjece/firstMS/Matrix/Matrix650trans.txt"
-#define MATRIXinv_PATH  "/home/liu/QtProjece/firstMS/Matrix/Matrix650inv.txt"
-#define SK_PATH         "/home/liu/QtProjece/firstMS/SK.txt"
+//linux
+#define FILE_PATH       "../doc/FILE0001.txt"
+#define MATRIX_PATH     "../firstMS/Matrix/Matrix650trans.txt"
+#define MATRIXinv_PATH  "../firstMS/Matrix/Matrix650inv.txt"
+#define SK_PATH         "../SK.txt"
 
+//windows
+//#define FILE_PATH       "..\\doc\\FILE0001.txt"
+//#define MATRIX_PATH     "..\\MS\\Matrix\\Matrix650trans.txt"
+//#define MATRIXinv_PATH  "..\\MS\\Matrix\\Matrix650inv.txt"
+//#define SK_PATH         "..\\SK.txt"
 
 
 // struct of node

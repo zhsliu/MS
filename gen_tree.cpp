@@ -188,12 +188,14 @@ int gen_tree( void ) {
     root = removeData();
 
     // write tree to file
-    fp = fopen("tree.txt", "w");
+    fp = fopen("../tree.txt", "w"); //linux
+    // fp = fopen("..\\tree.txt","w");   //windows
     tree2file(fp, root);
     fclose(fp);
 
     // write IDF to file for trapdoor
-    fp = fopen("IDF.txt", "w");
+    fp = fopen("../IDF.txt", "w");  //linux
+    // fp = fopen("..\\IDF.txt","w") //windows
     for( i = 0; i < DICT_SIZE; i++ ) {
         fprintf(fp, "%lf ", IDF[i]);
     }

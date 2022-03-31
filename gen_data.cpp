@@ -14,7 +14,8 @@
 // only 26*n is support due to invert matrix function
 // only 26 and 676 add to git
 #define DICT_SIZE       650
-#define FILE_PATH       "/home/liu/QtProjece/firstMS/doc/FILE0001.txt"
+//#define FILE_PATH       "/home/liu/QtProjece/firstMS/doc/FILE0001.txt"
+#define FILE_PATH       "../doc/FILE0001.txt"   //linux路径
 
 
 
@@ -26,12 +27,10 @@ int gen_data() {
     // initial the random seed
     srand( time(nullptr) );
     // if no dir "doc", creat it
-    //printf("%d",stat("/home/liu/QtProjece/firstMS/doc",&st));
-    if (stat("/home/liu/QtProjece/firstMS/doc", &st) == -1) {
-        mkdir("/home/liu/QtProjece/firstMS/doc",0700);
-        //printf("第二部");
+    //printf("%d",stat("/home/liu/QtProjece/firstMS/doc",&st)); //检测文件状态
+    if (stat("../doc", &st) == -1) {
+        mkdir("../doc",0700);
     }
-    //printf("第一步");
 
     // for each file
     for( i = 0; i < FILE_SIZE; i++ ) {

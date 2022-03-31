@@ -10,6 +10,7 @@
 #include "gen_data.cpp"
 #include "gen_tree.cpp"
 #include "do_search.cpp"
+#include "result.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -18,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setFixedSize(600,500);
+    //this->setFixedSize(600,500);
 
     //状态栏添加文字
     QLabel *state_msg = new QLabel(this);
@@ -65,20 +66,33 @@ void MainWindow::on_action_7_triggered()
 
 void MainWindow::on_do_search_btn_clicked()
 {
-    QMessageBox::information(this,"提示","正在检索，请稍等。。");
+    QMessageBox::StandardButton return_btn = QMessageBox::information(this,"提示","正在检索，请稍等。。",QMessageBox::Yes);
 //    do_search();
-
+    if(return_btn == QMessageBox::Yes)
+    {
+        seres = new searchResult;
+        seres->show();
+    }
 }
 
 //生成数据
 void MainWindow::on_actionaction_1_triggered()
 {
     gen_data();
-    QMessageBox::information(this,"提示","数据生成完成");
+    QMessageBox::information(nullptr,"提示","数据生成完成",QMessageBox::Yes);
+
 }
 
 //生成树
 void MainWindow::on_actionaction_2_triggered()
 {
     gen_tree();
+    QMessageBox::information(this,"提示","密钥生成成功");
+}
+
+void MainWindow::on_action_6_triggered()
+{
+    res = new Result;
+    res->show();
+
 }

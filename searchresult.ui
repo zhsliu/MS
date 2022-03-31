@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>searchResult</class>
+ <widget class="QWidget" name="searchResult">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>366</width>
+    <height>224</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>搜索结果</string>
+  </property>
+  <widget class="QTableWidget" name="search_result">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>11</y>
+     <width>341</width>
+     <height>211</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
