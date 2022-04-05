@@ -7,10 +7,10 @@
 #include "aboutdialog.h"
 #include "QStackedWidget"
 #include "QMessageBox"
-#include "gen_data.cpp"
-#include "gen_tree.cpp"
-#include "do_search.cpp"
 #include "result.h"
+#include "gen_data.cpp"
+#include "gen_tree.cpp" //直接文件包括进来
+
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -30,8 +30,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     //上传功能打开生成文件
     connect(ui->action_5,&QAction::triggered,this,[=](){
-        searchbtn = new search;
-        searchbtn->show();
+        do_search_btn = new search;
+        do_search_btn->show();
     });
 
     ui->stackedWidget->setCurrentIndex(0);

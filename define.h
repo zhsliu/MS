@@ -2,14 +2,21 @@
 #define DEFINE_H
 
 #define FILE_SIZE       500
-// only 26*n is support due to invert matrix function
-// only 26 and 676 add to git
 #define DICT_SIZE       650
 //linux
 #define FILE_PATH       "../doc/FILE0001.txt"
 #define MATRIX_PATH     "../firstMS/Matrix/Matrix650trans.txt"
 #define MATRIXinv_PATH  "../firstMS/Matrix/Matrix650inv.txt"
 #define SK_PATH         "../SK.txt"
+extern double TF[FILE_SIZE][DICT_SIZE], IDF[DICT_SIZE];
+extern double M[2][DICT_SIZE][DICT_SIZE];
+extern double Dtmp[DICT_SIZE];
+extern double D[2][DICT_SIZE];
+extern int SK[DICT_SIZE];
+extern int front;
+extern int rear;
+extern int itemCount;
+
 
 //windows
 //#define FILE_PATH       "..\\doc\\FILE0001.txt"

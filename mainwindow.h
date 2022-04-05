@@ -7,6 +7,7 @@
 #include "result.h"
 #include "searchresult.h"
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -34,13 +35,19 @@ private slots:
 
     void on_action_6_triggered();
 
+
+
 private:
     Ui::MainWindow *ui;
-    search *searchbtn ;
+    search *do_search_btn ;
     AboutDialog *about;
     Result *res;
     searchResult *seres;
 
 
 };
+
+//extern int gen_data();   问题根源？
+
+//extern int gen_tree();
 #endif // MAINWINDOW_H
