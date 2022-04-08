@@ -20,6 +20,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    int do_search( std::vector<std::string> Result );
+
+
+
 private slots:
     void on_action_8_triggered();
 
@@ -36,6 +40,8 @@ private slots:
     void on_action_6_triggered();
 
 
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

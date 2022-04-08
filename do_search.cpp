@@ -7,6 +7,12 @@
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
+#include <vector>
+#include <string>
+#include <QMessageBox>
+#include <mainwindow.cpp>
+#include <mainwindow.h>
+#include <QDebug>
 #include "define.h"
 
 
@@ -15,10 +21,10 @@
  */
 
 extern double TF[FILE_SIZE][DICT_SIZE], IDF[DICT_SIZE];
-extern double querytmp[DICT_SIZE];
-extern double querytmp2[2][DICT_SIZE];
-extern double query[2][DICT_SIZE];
-extern double RList[FILE_SIZE][2];
+double querytmp[DICT_SIZE];
+double querytmp2[2][DICT_SIZE];
+double query[2][DICT_SIZE];
+double RList[FILE_SIZE][2];
 extern double M[2][DICT_SIZE][DICT_SIZE];
 extern int SK[];
 
@@ -99,9 +105,9 @@ void bfsearch(Node *root, double RList[DICT_SIZE][2], int k) {
     return ;
 }
 
-int do_search( void ) {
+int MainWindow::do_search( std::vector<std::string> Result ) {
     int i, j, k, n, wordindex;
-    char req[10];
+    std::string req;
     double sum;
     FILE *fp;
     Node *root;
@@ -136,35 +142,55 @@ int do_search( void ) {
         fscanf(fp, "%lf ", &IDF[i]);
     }
     fclose(fp);
-    puts("\n\n*** Finish reading from file. ***\n\n");
+    //puts("\n\n*** Finish reading from file. ***\n\n");
 
     // do search
-    while( 1 ) {
+    //初始化tablewidget
+    k = std::stoi( Result[0]);//没问题
+    n = std::stoi(Result[1]);
+
+    //初始化Tablewidget
+    ui->third_result->setColumnCount(3);
+    ui->third_result->setHorizontalHeaderLabels(QStringList() << "文件名" << "所在文件夹" << "rank");
+    ui->third_result->setRowCount(n);
+
+
+//    while( 1 ) {
         memset(query, 0, sizeof(querytmp));
         memset(RList, 0, sizeof(RList));
-        puts("Usage : 'k-top' 'keyword number' 'keyword1' 'keyword2' ...");
-        puts("Example :  5           3             aa         ac      ae");
 
         // 读取搜索请求
-        scanf("%d %d ", &k, &n);//n:关键词个数
-        for( i = 0; i < n; i++ ) {
-            scanf("%s", req);
+//        scanf("%d %d ", &k, &n);//n:关键词个数
+//        k = std::stoi( Result[0]);//没问题
+//        n = std::stoi(Result[1]);
+//        //初始化Tablewidget
+//        ui->third_result->setColumnCount(3);
+//        ui->third_result->setHorizontalHeaderLabels(QStringList() << "文件名" << "所在文件夹" << "rank");
+//        ui->third_result->setRowCount(n);
+
+
+        for( i = 2; i < Result.size(); i++ ) {
+            //scanf("%s", req);
+            req = Result[i];//没问题
+//            std::cout << req << "\n";
             // check req format
             wordindex = 0;
-            for( j = 0; j < strlen(req); j++ ) {
+            for( j = 0; j < req.length(); j++ ) {
                 if( !islower(req[j]) ) {
                     wordindex += DICT_SIZE;
                     break;
                 }
                 wordindex *= 26;
                 wordindex += req[j] - 'a';
-            }
+            }//没问题
 
 
-            printf("\tInput %d = '%s'\tindex = %d\n", i, req, wordindex);
+            //printf("\tInput %d = '%s'\tindex = %d\n", i, req, wordindex);
+//            std::cout << i-2 << req << wordindex <<"\n";
             if( wordindex >= DICT_SIZE ) {
-                puts("Input format Error");
-                break;
+//                puts("Input format Error");
+                return 2;
+//                break;
             }
             querytmp[ wordindex ] = IDF[ wordindex ];
         }
@@ -181,7 +207,7 @@ int do_search( void ) {
 
         /* Changed part in BDMRS */
         //
-        for( i = 0; i < DICT_SIZE; i++ ) {
+       for( i = 0; i < DICT_SIZE; i++ ) {
             if( SK[i] == 0 ) {
                 querytmp2[0][i] = querytmp[i] *rand()/RAND_MAX;
                 querytmp2[1][i] = querytmp[i] - querytmp2[0][i];
@@ -202,18 +228,24 @@ int do_search( void ) {
 
         // really do search
         //search(root, RList, k, query);
-        bfsearch(root, RList, k);
-        puts("\n\nReaults = ");
+       bfsearch(root, RList, k);
+//        puts("\n\nReaults = ");
         for( i = 0; i < k; i++ ) {
-            if( RList[i][1] > 0 )
-                printf("\tRank%3d = File%4d Score = %lf\n", i+1, (int)RList[i][0], RList[i][1]);
+            if( RList[i][1] > 0 ){
+//                printf("\tRank%3d = File%4d Score = %lf\n", i+1, (int)RList[i][0], RList[i][1]);
+//                std::cout << i+1 << (int)RList[i][0] << RList[i][1] << "\n";
+                //设置内容
+                ui->third_result->setItem(i,0,new QTableWidgetItem(QString::number((int)RList[i][0])));
+                ui->third_result->setItem(i,1,new QTableWidgetItem("/doc"));
+                ui->third_result->setItem(i,2,new QTableWidgetItem(QString::number(RList[i][1])));
+            }
             else {
-                puts("No more result");
+                //puts("No more result");
                 break;
             }
         }
-        puts("\n\n\n\n");
-    }
+        //puts("\n\n\n\n");*/
+//    }
 
     return 0;
 }

@@ -8,6 +8,10 @@
 #include "QStackedWidget"
 #include "QMessageBox"
 #include "result.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include "strSplit.cpp"
 #include "gen_data.cpp"
 #include "gen_tree.cpp" //直接文件包括进来
 
@@ -66,13 +70,27 @@ void MainWindow::on_action_7_triggered()
 
 void MainWindow::on_do_search_btn_clicked()
 {
-    QMessageBox::StandardButton return_btn = QMessageBox::information(this,"提示","正在检索，请稍等。。",QMessageBox::Yes);
-//    do_search();
-    if(return_btn == QMessageBox::Yes)
-    {
-        seres = new searchResult;
-        seres->show();
+    QMessageBox::StandardButton return_btn;
+    QString str_qt = ui->lineEdit->text();
+    std::string str = str_qt.toStdString();
+    if(str_qt == nullptr ){
+        QMessageBox::warning(this,"警告" , "内容不能为空");
+    }else{
+        return_btn = QMessageBox::information(this,"提示","正在检索，请稍等。。",QMessageBox::Yes);
+        std::string pattern(" ");
+
+            std::vector<std::string> result = split(str,pattern);
+
+            if(do_search(result) == 2){
+                    QMessageBox::warning(this,"警告" , "格式错误");
+            }
     }
+    ui->stackedWidget->setCurrentIndex(2);
+//    if(return_btn == QMessageBox::Yes)
+//    {
+//        seres = new searchResult;
+//        seres->show();
+//    }
 }
 
 //生成数据
@@ -92,7 +110,15 @@ void MainWindow::on_actionaction_2_triggered()
 
 void MainWindow::on_action_6_triggered()
 {
-    res = new Result;
-    res->show();
+//    res = new Result;
+//    res->show();
+    ui->stackedWidget->setCurrentIndex(2);
 
+}
+
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    QMessageBox::information(this,"提示","下载成功");
 }

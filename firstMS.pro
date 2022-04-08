@@ -25,7 +25,8 @@ SOURCES += \
     mainwindow.cpp \
     result.cpp \
     search.cpp \
-    searchresult.cpp
+    searchresult.cpp \
+    strSplit.cpp
 
 HEADERS += \
     aboutdialog.h \

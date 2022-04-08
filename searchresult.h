@@ -15,6 +15,8 @@ public:
     explicit searchResult(QWidget *parent = nullptr);
     ~searchResult();
 
+    int do_search( std::vector<std::string> Result);
+
 private:
     Ui::searchResult *ui;
 };
