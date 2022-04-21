@@ -1,12 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "Data.h"
 #include <QMainWindow>
 #include <search.h>
 #include <aboutdialog.h>
 #include "result.h"
 #include "searchresult.h"
-
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,7 +20,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    int do_search( std::vector<std::string> Result );
+    int do_search( std::vector<std::string> Result ,Node *root);
+    void read();
+    Node *file2tree( FILE *fp );
+    Node *root = new Node();
 
 
 
@@ -39,8 +42,6 @@ private slots:
 
     void on_action_6_triggered();
 
-
-
     void on_pushButton_clicked();
 
 private:
@@ -53,7 +54,4 @@ private:
 
 };
 
-//extern int gen_data();   问题根源？
-
-//extern int gen_tree();
 #endif // MAINWINDOW_H

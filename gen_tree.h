@@ -1,3 +1,7 @@
+#ifndef GEN_TREE_H
+#define GEN_TREE_H
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,6 +11,7 @@
 #include <math.h>
 #include <time.h>
 #include "define.h"
+#include "Data.h"
 
 /***
  * This code generate the tree base on the data generate by gen_data
@@ -203,3 +208,6 @@ int gen_tree( void ) {
 
     return 0;
 }
+
+
+#endif // GEN_TREE_H

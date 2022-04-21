@@ -19,7 +19,6 @@ SOURCES += \
     aboutdialog.cpp \
     do_search.cpp \
     gen_data.cpp \
-    gen_tree.cpp \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -29,8 +28,10 @@ SOURCES += \
     strSplit.cpp
 
 HEADERS += \
+    Data.h \
     aboutdialog.h \
     define.h \
+    gen_tree.h \
     login.h \
     mainwindow.h \
     result.h \

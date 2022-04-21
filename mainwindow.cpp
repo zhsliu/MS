@@ -13,7 +13,9 @@
 #include <vector>
 #include "strSplit.cpp"
 #include "gen_data.cpp"
-#include "gen_tree.cpp" //直接文件包括进来
+#include "gen_tree.h"
+#include "qdebug.h"
+
 
 
 
@@ -23,9 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //this->setFixedSize(600,500);
-
     //状态栏添加文字
+    read();
     QLabel *state_msg = new QLabel(this);
     state_msg->setMinimumSize(state_msg->sizeHint()); //设置label属性
     state_msg->setAlignment(Qt::AlignHCenter);        //设置label属性
@@ -47,7 +48,45 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::read(){
+    FILE *fp;
+    fp = fopen("../tree.txt", "r");
+    root = file2tree(fp);
+}
 
+Node * MainWindow::file2tree( FILE *fp ) {
+    int i, l, r;
+    Node tn;
+
+    if( feof(fp) != 0 ) return nullptr;//文件结束返回非0
+    // ID
+    fscanf(fp, "%d ", &tn.ID);
+    // D
+    for( i = 0; i < DICT_SIZE; i++ ) {
+        fscanf(fp, "%lf ", &tn.D[0][i]);//将fp的内容读出
+        fscanf(fp, "%lf ", &tn.D[1][i]);
+    }
+    // 指针
+    fscanf(fp, "%d %d ", &l, &r);
+    // FID
+    fscanf(fp, "%d ", &tn.FID);
+    // 递归调用
+    if( l != -1 )//不是叶子节点
+        tn.Pl = file2tree( fp );
+    else
+        tn.Pl = nullptr;
+    if( r != -1 )
+        tn.Pr = file2tree( fp );
+    else
+        tn.Pr = nullptr;
+    // 检查左右孩子的身份
+    if( (tn.Pl != nullptr && l != tn.Pl->ID)
+            || (tn.Pr != nullptr && r != tn.Pr->ID ) ) {
+        printf("Error at reading Node %3d from file\n", tn.ID);
+    }
+
+    return insert(&tn);
+}
 
 //帮助
 void MainWindow::on_action_8_triggered()
@@ -73,6 +112,7 @@ void MainWindow::on_do_search_btn_clicked()
     QMessageBox::StandardButton return_btn;
     QString str_qt = ui->lineEdit->text();
     std::string str = str_qt.toStdString();
+    //std::cout << str << "\n";
     if(str_qt == nullptr ){
         QMessageBox::warning(this,"警告" , "内容不能为空");
     }else{
@@ -80,10 +120,12 @@ void MainWindow::on_do_search_btn_clicked()
         std::string pattern(" ");
 
             std::vector<std::string> result = split(str,pattern);
+            //std::cout << result[0] << " " << result[1] << std::endl;
 
-            if(do_search(result) == 2){
-                    QMessageBox::warning(this,"警告" , "格式错误");
-            }
+//            if(do_search(result) == 2){
+//                    QMessageBox::warning(this,"警告" , "格式错误");
+//            }
+            do_search(result,root);
     }
     ui->stackedWidget->setCurrentIndex(2);
 //    if(return_btn == QMessageBox::Yes)
@@ -121,4 +163,5 @@ void MainWindow::on_action_6_triggered()
 void MainWindow::on_pushButton_clicked()
 {
     QMessageBox::information(this,"提示","下载成功");
+    ui->third_result->setRowCount(0);
 }
